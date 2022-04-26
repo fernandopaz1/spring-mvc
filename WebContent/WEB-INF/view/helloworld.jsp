@@ -7,5 +7,7 @@
         <h2>Hello World of spring!</h2>
         
         <p>Student name: ${param.studentName }</p>
+        
+        <p>Message from model: ${message}</p>
     </body>
 </html>

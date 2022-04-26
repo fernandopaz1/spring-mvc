@@ -9,5 +9,14 @@
 			placeholder="What's your name?">
 		<input type="submit">
 	</form>
+	
+	<hr>
+	
+	<form action="processFormVersionTwo" method="GET">
+		<label for="studentName">Form Version Two</label>
+		<input type="text" name="studentName" 
+			placeholder="What's your name?">
+		<input type="submit">
+	</form>
 </body>
 </html>
