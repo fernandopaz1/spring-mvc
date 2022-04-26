@@ -141,3 +141,64 @@ En el archivo `WEB-INF/spring-mvc-demo-servlet.xml` definimos un resolvedor de n
 ```
 
 Esto toma el nombre de una view y agrega el prefix de `/WEB-INF/view/` y el suffix de `.jsp`, por lo que en la url `/` mediante la función ShowMyPage del controller se devolverá la vista `/WEB-INF/view/main-menu.jsp`
+
+## Model
+
+El modelo es un objeto de spring en el cual podemos almacenar datos procesados y estos pueden ser accedidos por las vistas.
+
+```
+@RequestMapping("/processFormVersionTwo")
+	public String letsShoutDude(HttpServletRequest request, Model model) {
+
+		// Leemos el parametro de la request del formularion http
+		String theName = request.getParameter("studentName");
+		// convertimos el parametro a mayusculas
+		theName = theName.toUpperCase();
+		// creamos el mensaje
+		String result = "Yo! " + theName;
+		// agregamos el mensaje al modelo
+		model.addAttribute("message", result);
+
+		return "helloworld";
+	}
+
+```
+
+En este caso tenemos un ejemplo de un control que lee información de la request, procesa esa información y la guarda en el model con una etiqueta dada.
+La información del modelo puede ser usada por el template haciendo referencia a la etiqueta con la que guardamos la información:
+
+```
+<p>Message from model: ${message}</p>
+```
+
+Por lo que accediendo a la url `localhost:8080/<nombre-del-proyecto>/processFormVersionTwo?studentName=Pepe` el control toma el valor del parametro `studentName` lo procesa y guarda con una etiqueta en el modelo. La vista utiliza dicha etiqueta para acceder a el dato guardado y mostrarlo.
+
+# Deploy en tomcat
+
+Para hacer un deploy en tomcat sin tener que usar eclipse debemos exportar el proyecto de eclipse en un formato `.war` y ubicarlo en la siguiente dirección:
+
+```
+<tomcat-install-directory>\webapps
+```
+
+Al levantar el servidor de tomcat podemos acceder a los archivos en el `.war`
+
+## Agregar archivos estáticos
+
+Para agregar archivos estaticos en los templates es necesario crear una carpeta dentro de `WebContent\` que los contenga, en el caso de este ejemplo sera `WebContent\resources`. En el archivo de configuración de spring MVC debemos agregar la siguiente linea:
+
+```
+<mvc:resources mapping="/resources/**" location="/resources/"></mvc:resources>
+```
+
+Esta escanea las carpetas y subcarpetas de resources buscando archivos estáticos.
+
+Una vez spring escanea todo, estos archivos pueden ser accedidos por las vistas mediante lineas como las siguientes:
+
+```
+ <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/my-test.css">
+
+<script src="${pageContext.request.contextPath}/resources/js/simple-test.js"></script>
+```
+
+Donde debemos usar `${pageContext.request.contextPath}` ya que este es el root correcto de la aplicación.
