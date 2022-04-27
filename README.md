@@ -202,3 +202,32 @@ Una vez spring escanea todo, estos archivos pueden ser accedidos por las vistas 
 ```
 
 Donde debemos usar `${pageContext.request.contextPath}` ya que este es el root correcto de la aplicación.
+
+# Request params y request mappings
+
+### Request binding
+
+Una forma mas sencilla de acceder a los parámetros de la petición http es usar request binding. En esta usamos la annotation `@RequestParam` y pasamos el nombre del parámetro de la url que deseamos obtener.
+
+```
+@RequestMapping("/processFormVersionThree")
+public String processFormVersionThree(
+		@RequestParam("studentName") String theName,
+		Model model) {
+
+	theName = theName.toUpperCase();
+	// creamos el mensaje
+	String result = "Hey my friend from V3! " + theName;
+	// agregamos el mensaje al modelo
+	model.addAttribute("message", result);
+
+	return "helloworld";
+}
+```
+
+De esta forma spring automáticamente obtiene el parámetro pedido de la url y se lo pasa como parámetro a la función controller.
+
+## Request Mappings
+
+Los mappings donde especificamos a que endpoint corresponde cada método se pueden agrupar dentro de otros mappings es decir teniendo una relación entre anidación de mappings y urls.
+Si agregamos la annotation `@RequestMapping("hola")` a la clase que contiene nuestros ejemplos ahora para acceder a los mismo endpoints debemos anteponer en la url `/hola/`

@@ -20,10 +20,14 @@
 	<!-- Escanea la carpeta resources y subcarpetas cargando archivos estaticos -->
 	<mvc:resources mapping="/resources/**" location="/resources/"></mvc:resources> 
 
-	<!-- Step 5: Define Spring MVC view resolver -->
+	<!-- Step 5: Define Spring MVC view resolver 
+	Es importante que sea /WEB-INF/view/ (absoluto)
+	ya que WEB-INF/view/ busca los archivos en otras carpetas,
+	relativas al parent mapping
+	-->
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="prefix" value="WEB-INF/view/" />
+		<property name="prefix" value="/WEB-INF/view/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
 
