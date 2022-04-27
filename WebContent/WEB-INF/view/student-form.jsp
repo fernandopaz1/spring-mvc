@@ -25,8 +25,10 @@
 	<br><br>
 	<form:select path="country">
 		
-		<!-- Aca le pasamos un linked hashMap -->
+		<form:options items="${theCountryOptions}" />
+		<%-- Aca le pasamos un linked hashMap 
 		<form:options items="${student.countryOptions }"/>
+		--%>
 		
 		<%-- 
 		Esta es la opcion si se quiere harcodear en la pagina
