@@ -16,6 +16,8 @@
 	
 	
 	<util:properties  id="countryOptions" location="classpath:../countries.properties" /> 
+	<util:properties  id="languagesOptions" location="classpath:../languages.properties" /> 
+	<util:properties  id="operatingSystemOptions" location="classpath:../operatingSystems.properties" /> 
 	
 	<!-- Step 3: Add support for component scanning -->
 	<context:component-scan base-package="com.luv2code.springdemo" />
@@ -37,6 +39,11 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
+	<!-- Load custom message resources-->
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames" value="resources/messages"/>
+	</bean>
 </beans>
 
 

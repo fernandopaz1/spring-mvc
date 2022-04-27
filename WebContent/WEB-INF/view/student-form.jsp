@@ -23,7 +23,7 @@
 	Last name: <form:input path="lastName"/>
 	
 	<br><br>
-	<form:select path="country">
+	Country: <form:select path="country">
 		
 		<form:options items="${theCountryOptions}" />
 		<%-- Aca le pasamos un linked hashMap 
@@ -40,6 +40,15 @@
 		<form:option value="India" label="India"/> --%>
 	</form:select>
 	
+	<br><br>
+	
+	Favorite Language: <form:radiobuttons path="favoriteLanguage" items="${theLanguageOptions}"/>
+	
+	<br><br>
+	
+	Operating System: <form:checkboxes path="operatingSystem" items="${theOperatingSystemOptions}"/>
+	
+	<br><br>
 	<input type="submit" value="submit">
 	</form:form>
 </body>

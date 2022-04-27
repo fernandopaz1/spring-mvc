@@ -23,6 +23,10 @@
 
 <br><br>
 
+<a href="customer/showForm">Customer form</a>
+
+<br><br>
+
 <img src="${pageContext.request.contextPath}/resources/images/spring-logo.png" />
 
 <br><br>
